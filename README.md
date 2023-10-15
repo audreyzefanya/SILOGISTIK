@@ -1,7 +1,11 @@
-Nama : Audrey Zefanya Priyambodo
 
-NPM : 2106650443
+# Tugas Individu APAP
 
-Kelas : APAP A
+## Authors
 
-Kolaborator : Natasya Ashil Zhafirah (2106650090), Ernest Benedictus Manurung (2106751000)
+* **Audrey Zefanya Priyambodo** - *2106650443* - *A* 
+
+## Collaborator 
+
+* **Natasya Ashil Zhafirah** - *2106650090* - *A*
+* **Ernest Benedictus Manurung** - *2106751000* - *A*
