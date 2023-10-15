@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+    <title>Ubah Barang</title>
+
+    <style>
+        .btn-batal {
+            background-color: #f6c1cc;
+            color: white;
+        }
+        .btn-batal:hover {
+            background-color: #dd99a9;
+        }
+        .btn-simpan {
+            background-color: #dd99a9;
+            color: white;
+        }
+        .btn-simpan:hover {
+            background-color: #f6c1cc;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:replace="fragments/navbar :: navbar(${'gudang'})"></nav>
+    <br />
+
+    <div class="d-flex flex-column justify-content-center m-5">
+        <div class="title h1 text-center">
+            Ubah Barang
+        </div>
+        <br />
+
+        <div>
+            <form th:action="@{/barang/} + ${barang.sku} + @{/ubah}" th:object="${barang}" method="POST">
+                <div>
+                    <label class="form-label" for="sku-barang">SKU:</label>
+                    <input type="text" th:field="*{sku}" class="form-control" id="sku-barang" disabled />
+                </div>
+                <br />
+                <div>
+                    <label class="form-label" for="merk-barang">Merk Barang:</label>
+                    <input type="text" th:field="*{merk}" class="form-control" id="merk-barang" required/>
+                </div>
+                <br />
+                <div>
+                    <label class="form-label" for="tipe-barang">Tipe Barang:</label>
+                    <select id="tipe-barang" class="form-control" th:field="*{tipeBarang}" disabled>
+                        <option th:value="1">Produk Elektronik</option>
+                        <option th:value="2">Pakaian & Aksesoris</option>
+                        <option th:value="3">Makanan dan Minuman</option>
+                        <option th:value="4">Kosmetik</option>
+                        <option th:value="5">Perlengkapan Rumah Tangga</option>
+                    </select>
+                </div>
+                <br />
+                <div>
+                    <label class="form-label" for="harga-barang">Harga Barang:</label>
+                    <input type="number" id="harga-barang" class="form-control" th:field="*{hargaBarang}" required/>
+                </div>
+                <br />
+                <div>
+                    <a th:href="@{/barang/} + ${barang.sku}" class="btn btn-batal">Batal</a>
+                    <button type="submit" class="btn btn-simpan">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

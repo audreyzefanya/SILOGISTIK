@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <style>
+    .btn-back {
+        background-color: #f6c1cc;
+        color: white;
+    }
+    .btn-back:hover {
+        background-color: #dd99a9;
+    }
+    .btn-ubah {
+        background-color: #f6c1cc;
+        color: white;
+    }
+    .btn-ubah:hover {
+        background-color: #dd99a9;
+    }
+    </style>
+
+        <body>
+            <nav th:replace="~{fragments/navbar :: navbar('barang')}"></nav>
+            <div class="d-flex flex-column justify-content-center" style="margin: 40px 120px">
+                <div class="d-flex flex-row justify-content-between">
+                    <div class="title h1">
+                        Detail Barang
+                    </div>
+                    <div>
+                        <a class="btn btn-ubah" type="button" th:href="@{/barang/} + ${barang.sku} + @{/ubah}">+ Ubah Barang</a>
+                    </div>
+                </div>
+            
+                <div class="text-start">
+                    <div class="row">
+                        <div class="col">
+                            Merk:
+                        </div>
+                        <div class="col" th:text="${barang.merk}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            SKU:
+                        </div>
+                        <div class="col" th:text="${barang.sku}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Tipe Barang
+                        </div>
+                        <div class="col" th:if="${barang.tipeBarang == 1}">Produk Elektronik</div>
+                        <div class="col" th:if="${barang.tipeBarang == 2}">Pakaian & Aksesoris</div>
+                        <div class="col" th:if="${barang.tipeBarang == 3}">Makanan dan Minuman</div>
+                        <div class="col" th:if="${barang.tipeBarang == 4}">Kosmetik</div>
+                        <div class="col" th:if="${barang.tipeBarang == 5}">Perlengkapan Rumah Tangga</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Total Stok:
+                        </div>
+                        <div class="col" th:text="${totalStok}"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Harga:
+                        </div>
+                        <div class="col" th:text="${barang.hargaBarang}">
+                        </div>
+                    </div>
+                    <br>
+            
+                    <table id="gudang" class="table table-bordered text-center">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Gudang</th>
+                            <th>Alamat Gudang</th>
+                            <th>Stok</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="gudang, iterationStatus: ${listGudang}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td><a th:text="${gudang.namaGudang}" th:href="@{/gudang/} + ${gudang.id}"></a></td>
+                            <td th:text="${gudang.alamatGudang}"></td>
+                            <td th:text="${listStok[__iterationStatus.index__]}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <a class="btn btn-back" type="button" href="/barang">Kembali</a>
+                </div>
+            </div>
+            
+            
+            </body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<title>Detail Permintaan Pengiriman</title>
+<style>
+    .btn-back {
+        background-color: #f6c1cc;
+        color: white;
+    }
+    .btn-back:hover {
+        background-color: #dd99a9;
+    }
+</style>
+</head>
+
+<body>
+<nav th:replace="~{fragments/navbar :: navbar('permintaanPengiriman')}"></nav>
+<div class="d-flex flex-column justify-content-center" style="margin: 5%">
+    <div class="d-flex flex-row justify-content-between">
+        <div class="title h1">
+            Detail Permintaan Pengiriman
+        </div>
+        <br>
+        <div>
+            <a th:if="${permintaanPengiriman.isCancelled == false}" class="btn btn-danger" type="button" th:href="@{/permintaan-pengiriman/} + ${permintaanPengiriman.id} + @{/cancel}">Cancel Permintaan</a>
+            <a th:if="${permintaanPengiriman.isCancelled == true}" class="btn btn-secondary" type="button" th:href="@{/permintaan-pengiriman/} + ${permintaanPengiriman.id} + @{/cancel}" style="pointer-events: none; cursor: default">Pengiriman sudah dibatalkan</a>
+        </div>
+    </div>
+
+    <div class="text-start">
+        <div class="row">
+            <div class="col">
+                No. Permintaan Pengiriman:
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.nomorPengiriman}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Waktu Permintaan:
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.waktuPermintaan}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Karyawan Bertugas
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.karyawan.nama}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Tanggal Pengiriman:
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.tanggalPengiriman}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Nama Penerima:
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.namaPenerima}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Alamat Penerima:
+            </div>
+            <div class="col" th:text="${permintaanPengiriman.alamatPenerima}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Jenis Layanan:
+            </div>
+            <div class="col" th:if="${permintaanPengiriman.jenisLayanan == 1}">Same Day</div>
+            <div class="col" th:if="${permintaanPengiriman.jenisLayanan == 2}">Kilat</div>
+            <div class="col" th:if="${permintaanPengiriman.jenisLayanan == 3}">Reguler</div>
+            <div class="col" th:if="${permintaanPengiriman.jenisLayanan == 4}">Hemat</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Biaya Pengiriman:
+            </div>
+            <div class="col" th:text="${'Rp'+ permintaanPengiriman.biayaPengiriman}">
+            </div>
+        </div>
+        <br>
+
+        <table id="barang" class="table table-bordered text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>SKU</th>
+                <th>Merk</th>
+                <th>Kuantitas Pesanan</th>
+                <th>Total Harga</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="permintaanPengirimanBarang, iterationStatus: ${listPermintaanPengirimanBarang}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td><a th:href="@{/barang/} + ${permintaanPengirimanBarang.barang.sku}" th:text="${permintaanPengirimanBarang.barang.sku}"></a></td>
+                <td th:text="${permintaanPengirimanBarang.barang.merk}"></td>
+                <td th:text="${permintaanPengirimanBarang.kuantitasPesanan}"></td>
+                <td th:text="${'Rp' + totalHarga[__iterationStatus.index__]}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a type="button" class="btn btn-back" href="/permintaan-pengiriman">Kembali</a>
+    </div>
+</div>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <object th:include="~{fragments/common :: js}"th:remove="tag"></object>
+    <object th:include="~{fragments/common :: css}"th:remove="tag"></object>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<title>Cancel Permintaan Pengiriman</title>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar(${'permintaanPengiriman'})"></nav>
+<br />
+
+<div class="d-flex flex-column justify-content-center text-center m-5">
+  <div class="title h1">
+    Cancel Permintaan Pengiriman
+  </div>
+  <br />
+
+  <div class="h3" th:if="${isCancelled == true}" th:text="'Permintaan pengiriman dengan nomor pengiriman ' + ${nomorPengiriman} + ' berhasil di-cancel'"></div>
+  <div class="h3" th:if="${isCancelled == false}" th:text="'Permintaan pengiriman dengan nomor pengiriman ' + ${nomorPengiriman} + ' tidak dapat di-cancel karena sudah lebih dari 1 hari'"></div>
+
+  <br />
+  <div>
+    <a class="btn btn-info" type="button" th:href="@{/}" style="width: 15%;">Kembali ke Beranda</a>
+  </div>
+
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</html>

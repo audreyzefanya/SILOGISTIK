@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SILOGISTIK</title>
+</head>
+
+<body>
+    <nav th:fragment="navbar(currentPage)" class="navbar navbar-expand-lg" style="background-color: #f7c1cc;">
+        <a class="navbar-brand fw-bold ms-3" href="/" style="color: black;">SILOGISTIK</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li th:class="${currentPage == 'gudang' ? 'dropdown active fw-bold' : 'nav-item dropdown'}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                        Gudang
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #f7c1cc;">
+                        <li><a class="dropdown-item" th:href="@{/gudang}" style="color: black;">Daftar Gudang</a></li>
+                        <li><a class="dropdown-item" th:href="@{/gudang/cari-barang}" style="color: black;">Cari Barang</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" th:class="${currentPage == 'barang' ? 'active fw-bold' : 'nav-item'}">
+                    <a class="nav-link" th:href="@{/barang}" style="color: white;">Barang</a>
+                </li>
+                <li class="nav-item" th:class="${currentPage == 'permintaanPengiriman' ? 'active fw-bold' : 'nav-item'}">
+                    <a class="nav-link" th:href="@{/permintaan-pengiriman}" style="color: white;">Permintaan Pengiriman</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+
+</html>

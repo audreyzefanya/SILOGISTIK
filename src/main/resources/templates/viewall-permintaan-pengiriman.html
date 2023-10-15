@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <title>Daftar Permintaan Pengiriman</title>
+    <style>
+        .btn-tambah {
+            background-color: #dd99a9;
+            color: white;
+        }
+    
+        .btn-tambah:hover {
+            background-color: #f6c1cc;
+        }
+        .btn-detail {
+            background-color: #f6c1cc;
+            color: white;
+        }
+        .btn-detail:hover {
+            background-color: #dd99a9;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('permintaanPengiriman')}"></nav>
+    <br />
+    
+    <div class="d-flex flex-column justify-content-center text-center m-5">
+        <div class="title h1">
+            Daftar Permintaan Pengiriman
+        </div>
+        <br />
+    
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-tambah" href="/permintaan-pengiriman/tambah" style="width: 28%">+ Tambah Permintaan Pengiriman</a>
+        </div>
+        <br>
+    
+        <table id="permintaan-pengiriman" class="table table-bordered" style="margin: 12px 12px">
+            <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Waktu Permintaan</th>
+                <th>Nomor Pengiriman</th>
+                <th>Nama Penerima</th>
+                <th>Alamat Penerima</th>
+                <th>Tanggal Pengiriman</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="permintaanPengiriman, iterationStatus: ${listPermintaanPengiriman}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${permintaanPengiriman.waktuPermintaan}"></td>
+                <td th:text="${permintaanPengiriman.nomorPengiriman}"></td>
+                <td th:text="${permintaanPengiriman.namaPenerima}"></td>
+                <td th:text="${permintaanPengiriman.alamatPenerima}"></td>
+                <td th:text="${permintaanPengiriman.tanggalPengiriman}"></td>
+                <td><a class="btn btn-detail" th:href="@{/permintaan-pengiriman/} + ${permintaanPengiriman.id}">Detail</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    </body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    
+    </html>

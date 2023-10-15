@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+    <html lang="en" xmlns:th="http://thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    </head>
+    <style>
+        .btn-info, {
+            background-color: #dd99a9;
+            color: white;
+        }
+    </style>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('barang')}"></nav>
+
+<br />
+
+<div class="d-flex flex-column justify-content-center text-center m-5">
+    <div class="title h1">
+        Status Add Barang
+    </div>
+    <br />
+
+    <div class="h3" th:if="${response.merk != null}" th:text="'Barang dengan merk ' + ${response.merk} + ' berhasil ditambahkan'"></div>
+    <div class="h3" th:if="${response.merk == null}" th:text="'Barang gagal ditambahkan'"></div>
+    <br />
+    <div>
+        <a class="btn btn-info" type="button" th:href="@{/barang}" style="width: 15%;">Kembali ke daftar Barang</a>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</html>

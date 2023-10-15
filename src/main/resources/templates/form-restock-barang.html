@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <style>
+        .btn-tambah {
+            background-color: #f6c1cc;
+            color: white;
+        }
+
+        .btn-tambah:hover {
+            background-color: #dd99a9;
+        }
+
+        .btn-batal, .btn-simpan {
+            background-color: #dd99a9;
+            color: white;
+        }
+
+        .btn-batal:hover, .btn-simpan:hover {
+            background-color: #f6c1cc;
+        }
+    </style>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('gudang')}"></nav>
+<br />
+<form th:action="@{/gudang/} + ${gudang.id} + @{/restock-barang}" th:object="${gudang}" method="POST">
+<div class="d-flex flex-column justify-content-center" style="margin: 40px 120px">
+    <div class="title h1 text-center">
+        Restock Gudang
+    </div>
+    <br />
+
+    <div class="text-start">
+        <div class="row">
+            <div class="col">
+                Nama Gudang:
+            </div>
+            <div class="col" th:text="${gudang.namaGudang}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Alamat Gudang:
+            </div>
+            <div class="col" th:text="${gudang.alamatGudang}">
+            </div>
+        </div>
+    </div>
+    <div>
+            <div class="d-flex justify-content-end">
+                <button name="addRow" type="submit" class="form-control btn btn-tambah" style="width: 160px; margin: 12px 0px">+ Tambah Barang</button>
+                
+            </div>
+            <table class="table table-bordered text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Barang</th>
+                    <th>Kuantitas</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="gudangBarang, iterationStatus : *{listGudangBarang}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td>
+                        <select th:field="*{listGudangBarang[__${iterationStatus.index}__].sku}" class="form-select">
+                            <div th:each="barang : ${listBarang}" >
+                                <option th:value="${barang.sku}" th:text="${barang.merk}"></option>
+                            </div>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" th:field="*{listGudangBarang[__${iterationStatus.index}__].stok}" required />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <a type="button" class="btn btn-batal" th:href="@{/gudang/} + ${gudang.id}" style="width: 15%">Batal</a>
+                <button type="submit" class="btn btn-simpan" name="submit" style="width: 15%">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</html>
